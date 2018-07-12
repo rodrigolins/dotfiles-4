@@ -3,7 +3,9 @@ filetype off
 
 call plug#begin("~/.config/nvim/bundle")
 Plug 'majutsushi/tagbar'
+Plug 'shougo/unite.vim'
 Plug 'shougo/denite.nvim'	
+Plug 'shougo/vimfiler.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sbdchd/neoformat'
 call plug#end()
@@ -16,6 +18,9 @@ let mapleader = "_"
 
 " neoformat
 :nnoremap ƒ :Neoformat<CR>
+
+" unite file explorer
+:nnoremap ∂ :VimFiler<CR>
 
 " Move lines up and down
 :nnoremap <S-Up> :m-2<CR>
