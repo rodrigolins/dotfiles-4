@@ -1,0 +1,1 @@
+/Users/teddy.kim/.zshrc

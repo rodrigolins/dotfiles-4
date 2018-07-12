@@ -1,0 +1,1 @@
+/Users/teddy.kim/.config/nvim/init.vim
