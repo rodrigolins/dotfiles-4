@@ -22,13 +22,13 @@ call plug#end()
 let mapleader = "_"
 
 " option-t open tagbar
-:nnoremap ß :TagbarToggle<CR>
+nnoremap <C-t> :TagbarToggle<CR>
 
 " neoformat
-:nnoremap ƒ :Neoformat<CR>
+nnoremap <C-f> :Neoformat<CR>
 
 " unite file explorer
-:nnoremap ∂ :VimFiler<CR>
+:nnoremap <C-e> :VimFiler<CR>
 
 " Move lines up and down
 :nnoremap <S-Up> :m-2<CR>
