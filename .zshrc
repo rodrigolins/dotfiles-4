@@ -128,3 +128,6 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 alias tnc=/Users/teddy.kim/projects/nginx-config/test-nginx-config.sh
+
+export PATH="$HOME/.fastlane/bin:$PATH"
+

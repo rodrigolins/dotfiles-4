@@ -2,12 +2,18 @@ set nocompatible
 filetype off
 
 call plug#begin("~/.config/nvim/bundle")
+Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'shougo/unite.vim'
 Plug 'shougo/denite.nvim'	
 Plug 'shougo/vimfiler.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sbdchd/neoformat'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
+Plug 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -18,8 +24,30 @@ endif
 let g:deoplete#enable_at_startup = 1
 call plug#end()
 
+" skywind
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
+" ale
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+" emmet
+" let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
 " mapleader
 let mapleader = "_"
+
+" tag search
+set tags=./tags;~/Projects
+
+" open tag in another window 
+nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
 
 " option-t open tagbar
 nnoremap <C-t> :TagbarToggle<CR>
