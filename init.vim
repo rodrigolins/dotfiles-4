@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 
 call plug#begin("~/.config/nvim/bundle")
+Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'shougo/unite.vim'
@@ -14,6 +15,8 @@ Plug 'mxw/vim-jsx'
 Plug 'mattn/emmet-vim'
 Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'artur-shaik/vim-javacomplete2'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -21,8 +24,59 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 call plug#end()
+
+" javacomplete2
+nnoremap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
+nnoremap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
+nnoremap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
+nnoremap <leader>jii <Plug>(JavaComplete-Imports-Add)
+
+inoremap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
+inoremap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
+inoremap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
+inoremap <C-j>ii <Plug>(JavaComplete-Imports-Add)
+
+nnoremap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+inoremap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+nnoremap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
+nnoremap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+nnoremap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+nnoremap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+nnoremap <leader>jts <Plug>(JavaComplete-Generate-ToString)
+nnoremap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
+nnoremap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
+nnoremap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
+
+inoremap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
+inoremap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
+inoremap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+vnoremap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+vnoremap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+vnoremap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+nnoremap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
+nnoremap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
+
+" deoplete
+let g:deoplete#enable_at_startup = 1 
+
+" syntastic 
+let g:syntastic_java_checkers = ['checkstyle']
+let g:syntastic_java_checkstyle_classpath = '~/checkstyle-8.12-all.jar'
+let g:syntastic_java_checkstyle_conf_file = '~/checkstyle.xml'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " skywind
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
@@ -33,7 +87,7 @@ let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " emmet
-" let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -56,13 +110,13 @@ nnoremap <C-t> :TagbarToggle<CR>
 nnoremap <C-f> :Neoformat<CR>
 
 " unite file explorer
-:nnoremap <C-e> :VimFiler<CR>
+nnoremap <C-e> :VimFiler<CR>
 
 " Move lines up and down
-:nnoremap <S-Up> :m-2<CR>
-:nnoremap <S-Down> :m+<CR>
-:inoremap <S-Up> <Esc>:m-2<CR>
-:inoremap <S-Down> <Esc>:m+<CR>
+nnoremap <S-Up> :m-2<CR>
+nnoremap <S-Down> :m+<CR>
+inoremap <S-Up> <Esc>:m-2<CR>
+inoremap <S-Down> <Esc>:m+<CR>
 
 " Denite configs
 nnoremap <C-p> :<C-u>Denite file_rec<CR>
@@ -125,7 +179,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " neoformat 
 augroup astyle
   autocmd!
-  autocmd BufWritePre * Neoformat
+ autocmd BufWritePre * Neoformat
 augroup END
 let g:neoformat_java_google = {
             \ 'exe': 'java',
@@ -152,9 +206,9 @@ call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'nor
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
-set tabstop=4
+set tabstop=2
 " when indenting with '>', use 4 spaces width
-set shiftwidth=4
+set shiftwidth=2
 " On pressing tab, insert 4 spaces
 set expandtab
 
