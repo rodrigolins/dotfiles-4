@@ -4,6 +4,7 @@ filetype off
 call plug#begin("~/.config/nvim/bundle")
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'shougo/unite.vim'
 Plug 'shougo/denite.nvim'	
@@ -112,6 +113,9 @@ nnoremap <C-f> :Neoformat<CR>
 " unite file explorer
 nnoremap <C-e> :VimFiler<CR>
 
+" highlight search
+nnoremap <C-h> :set hlsearch!<CR>
+
 " Move lines up and down
 nnoremap <S-Up> :m-2<CR>
 nnoremap <S-Down> :m+<CR>
@@ -177,16 +181,16 @@ let g:deoplete#file#enable_buffer_path = 1
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " neoformat 
-augroup astyle
-  autocmd!
- autocmd BufWritePre * Neoformat
-augroup END
-let g:neoformat_java_google = {
-            \ 'exe': 'java',
-            \ 'args': ['-jar /usr/local/bin/google-java-format-1.6.jar -'],
-            \ 'stdin': 1, 
-            \ }
-let g:neoformat_enabled_java = ['google']
+" augroup astyle
+"   autocmd!
+"  autocmd BufWritePre * Neoformat
+" augroup END
+" let g:neoformat_java_google = {
+"             \ 'exe': 'java',
+"             \ 'args': ['-jar /usr/local/bin/google-java-format-1.6.jar -'],
+"             \ 'stdin': 1, 
+"             \ }
+" let g:neoformat_enabled_java = ['google']
 
 let g:tagbar_type_groovy = {
     \ 'ctagstype' : 'groovy',
