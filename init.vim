@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 
 call plug#begin("~/.config/nvim/bundle")
+Plug 'elmcast/elm-vim'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -18,6 +19,7 @@ Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'tomasr/molokai'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
