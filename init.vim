@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 
 call plug#begin("~/.config/nvim/bundle")
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'elmcast/elm-vim'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'tpope/vim-fugitive'
