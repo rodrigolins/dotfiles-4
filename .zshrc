@@ -5,15 +5,12 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Make python 3 the default
 #alias python="python3"
 
-#FZF configs
-# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
-export FZF_DEFAULT_COMMAND='nvim $(fzf)'
-
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/teddy.kim/.oh-my-zsh
+export ZSH=/Users/teddykim/.oh-my-zsh
 
 #JAVA STUFF
-export JAVA_HOME=/Users/teddy.kim/.sdkman/candidates/java/current
+# export JAVA_HOME=/Users/teddykim/.sdkman/candidates/java/current
+
 # Need this because pip can't compile pygraphviz without being pointed to graphviz
 #export CFLAGS="-I/usr/local/include -L/usr/local/lib"
 
@@ -107,30 +104,29 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # intellij home
-export  INTELLIJ_HOME="/Applications/IntelliJ IDEA.app/Contents"  
+# export  INTELLIJ_HOME="/Applications/IntelliJ IDEA.app/Contents"  
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/Library/android/sdk/tools:$HOME/.rvm/bin:$INTELLIJ_HOME/bin"
+# export PATH="$PATH:$HOME/Library/android/sdk/tools:$HOME/.rvm/bin:$INTELLIJ_HOME/bin"
 
 # android home
-export ANDROID_HOME="/Users/teddy.kim/Library/Android/sdk/tools"
+# export ANDROID_HOME="/Users/teddy.kim/Library/Android/sdk/tools"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--extended"
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/teddy.kim/.sdkman"
+#HIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# export SDKMAN_DIR="/Users/teddy.kim/.sdkman"
 
 #eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
-[[ -s "/Users/teddy.kim/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/teddy.kim/.sdkman/bin/sdkman-init.sh"
+# [[ -s "/Users/teddy.kim/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/teddy.kim/.sdkman/bin/sdkman-init.sh"
 
 
 # export NVM_DIR="$HOME/.nvm"
 # . "/usr/local/opt/nvm/nvm.sh"
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-alias tnc=/Users/teddy.kim/projects/nginx-config/test-nginx-config.sh
-
-export PATH="$HOME/.fastlane/bin:$PATH"
+# export path="$home/.fastlane/bin:$path"
 

@@ -2,116 +2,48 @@ set nocompatible
 filetype off
 
 call plug#begin("~/.config/nvim/bundle")
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'elmcast/elm-vim'
-Plug 'prettier/vim-prettier', {'do': 'yarn install'}
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'majutsushi/tagbar'
-Plug 'shougo/unite.vim'
-Plug 'shougo/denite.nvim'	
-Plug 'shougo/vimfiler.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'sbdchd/neoformat'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mattn/emmet-vim'
-Plug 'w0rp/ale'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'tomasr/molokai'
+ Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'elmcast/elm-vim'
+" Plug 'prettier/vim-prettier', {'do': 'yarn install'}
+ Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-surround'
+ Plug 'majutsushi/tagbar'
+ Plug 'shougo/unite.vim'
+ Plug 'shougo/denite.nvim'	
+ Plug 'shougo/vimfiler.vim'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'sbdchd/neoformat'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mattn/emmet-vim'
+" Plug 'w0rp/ale'
+" Plug 'skywind3000/asyncrun.vim'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'artur-shaik/vim-javacomplete2'
+ Plug '~/.fzf' 
+ Plug 'tomasr/molokai'
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+ " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+  " Plug 'Shougo/deoplete.nvim'
+  " Plug 'roxma/nvim-yarp'
+  " Plug 'roxma/vim-hug-neovim-rpc'
 endif
 call plug#end()
 
-" javacomplete2
-nnoremap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
-nnoremap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
-nnoremap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
-nnoremap <leader>jii <Plug>(JavaComplete-Imports-Add)
-
-inoremap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
-inoremap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
-inoremap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
-inoremap <C-j>ii <Plug>(JavaComplete-Imports-Add)
-
-nnoremap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-inoremap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
-
-nnoremap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
-nnoremap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-nnoremap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-nnoremap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-nnoremap <leader>jts <Plug>(JavaComplete-Generate-ToString)
-nnoremap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
-nnoremap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
-nnoremap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
-
-inoremap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
-inoremap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
-inoremap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-vnoremap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
-vnoremap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
-vnoremap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
-
-nnoremap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
-nnoremap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
-
 " deoplete
 let g:deoplete#enable_at_startup = 1 
-
-" syntastic 
-let g:syntastic_java_checkers = ['checkstyle']
-let g:syntastic_java_checkstyle_classpath = '~/checkstyle-8.12-all.jar'
-let g:syntastic_java_checkstyle_conf_file = '~/checkstyle.xml'
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" skywind
-autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
-
-" ale
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-
-" emmet
-let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
 
 " mapleader
 let mapleader = "_"
 
 " tag search
-set tags=./tags;~/Projects
+set tags=./tags;~/projects
 
 " open tag in another window 
 nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
 
 " option-t open tagbar
 nnoremap <C-t> :TagbarToggle<CR>
-
-" neoformat
-nnoremap <C-f> :Neoformat<CR>
 
 " unite file explorer
 nnoremap <C-e> :VimFiler<CR>
@@ -180,9 +112,6 @@ let g:deoplete#sources = {}
 let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
 
-" Java Complete 
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
 " neoformat 
 " augroup astyle
 "   autocmd!
@@ -194,19 +123,6 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 "             \ 'stdin': 1, 
 "             \ }
 " let g:neoformat_enabled_java = ['google']
-
-let g:tagbar_type_groovy = {
-    \ 'ctagstype' : 'groovy',
-    \ 'kinds'     : [
-        \ 'p:package:1',
-        \ 'c:classes',
-        \ 'i:interfaces',
-        \ 't:traits',
-        \ 'e:enums',
-        \ 'm:methods',
-        \ 'f:fields:1'
-    \ ]
-    \ }
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
