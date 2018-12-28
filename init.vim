@@ -19,15 +19,15 @@ call plug#begin("~/.config/nvim/bundle")
 " Plug 'skywind3000/asyncrun.vim'
 " Plug 'vim-syntastic/syntastic'
 " Plug 'artur-shaik/vim-javacomplete2'
- Plug '~/.fzf' 
- Plug 'tomasr/molokai'
-if has('nvim')
- " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" Plug 'tomasr/molokai'
+ Plug 'morhetz/gruvbox'
+ if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+ else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+ endif
 call plug#end()
 
 " deoplete
@@ -135,3 +135,6 @@ set shiftwidth=2
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" scheme
+colorscheme gruvbox
+set background=dark
