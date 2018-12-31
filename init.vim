@@ -6,6 +6,7 @@ call plug#begin("~/.config/nvim/bundle")
 " Plug 'elmcast/elm-vim'
 " Plug 'prettier/vim-prettier', {'do': 'yarn install'}
  Plug 'tpope/vim-fugitive'
+ Plug 'tpope/vim-rails'
 " Plug 'tpope/vim-surround'
  Plug 'majutsushi/tagbar'
  Plug 'shougo/unite.vim'

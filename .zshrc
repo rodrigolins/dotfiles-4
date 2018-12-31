@@ -131,3 +131,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # export path="$home/.fastlane/bin:$path"
 
+
+# Added by ./setup
+PATH=/Users/teddykim/.gem/ruby/2.3.0/bin:$PATH
+
+# Added by ./setup
+PATH=.bundle/bin:$PATH
