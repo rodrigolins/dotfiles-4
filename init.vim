@@ -3,6 +3,7 @@ filetype off
 
 call plug#begin("~/.config/nvim/bundle")
  Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'burnettk/vim-angular'
 " Plug 'elmcast/elm-vim'
 " Plug 'prettier/vim-prettier', {'do': 'yarn install'}
  Plug 'tpope/vim-fugitive'
@@ -21,6 +22,10 @@ call plug#begin("~/.config/nvim/bundle")
 " Plug 'vim-syntastic/syntastic'
 " Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'tomasr/molokai'
+" Plug 'jsfaint/gen_tags.vim'
+" Plug 'skywind3000/vim-preview'
+ Plug 'HerringtonDarkholme/yats.vim'
+ Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
  Plug 'morhetz/gruvbox'
  if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -38,7 +43,7 @@ let g:deoplete#enable_at_startup = 1
 let mapleader = "_"
 
 " tag search
-set tags=./tags;~/projects
+set tags=./tags
 
 " open tag in another window 
 nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
@@ -67,6 +72,11 @@ nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
 nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
 nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
 
+" rspec
+nnoremap <leader>rt :!rspec %<CR>
+nnoremap <leader>ra :!rake spec<CR>
+nnoremap <leader>tt :!bin/rails test %<CR>
+
 if has('nvim')
   " reset 50% winheight on window resize
   augroup deniteresize
@@ -80,10 +90,10 @@ if has('nvim')
         \ })
 
   call denite#custom#var('file_rec', 'command',
-        \ ['rg', '--files', '--glob', '!.git', ''])
+        \ ['rg', '--files', '--glob', '!.git', '!node_modules'])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts',
-        \ ['--hidden', '--vimgrep', '--no-heading', '-S'])
+        \ ['--hidden', '--vimgrep', '--smart-case'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
   call denite#custom#var('grep', 'separator', ['--'])
