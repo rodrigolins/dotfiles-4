@@ -8,13 +8,15 @@ call plug#begin("~/.config/nvim/bundle")
 " Plug 'prettier/vim-prettier', {'do': 'yarn install'}
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-rails'
+ Plug 'vim-ruby/vim-ruby'
 " Plug 'tpope/vim-surround'
  Plug 'majutsushi/tagbar'
  Plug 'shougo/unite.vim'
  Plug 'shougo/denite.nvim'	
  Plug 'shougo/vimfiler.vim'
+" Plug 'mfulz/cscope.nvim'
 " Plug 'jiangmiao/auto-pairs'
-" Plug 'sbdchd/neoformat'
+ Plug 'sbdchd/neoformat'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mattn/emmet-vim'
 " Plug 'w0rp/ale'
@@ -36,6 +38,19 @@ call plug#begin("~/.config/nvim/bundle")
  endif
 call plug#end()
 
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+
+" Enable file operation commands.
+" Edit file by tabedit.
+call vimfiler#custom#profile('default', 'context', {
+      \ 'safe' : 0,
+      \ })
+
+" window zooming
+noremap Zz :tabnew %<CR> 
+noremap Zo :q<CR>
+ 
 " deoplete
 let g:deoplete#enable_at_startup = 1 
 
@@ -47,6 +62,9 @@ set tags=./tags
 
 " open tag in another window 
 nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+
+" open tag in vertical split
+map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " option-t open tagbar
 nnoremap <C-t> :TagbarToggle<CR>
@@ -75,7 +93,7 @@ nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
 " rspec
 nnoremap <leader>rt :!rspec %<CR>
 nnoremap <leader>ra :!rake spec<CR>
-nnoremap <leader>tt :!bin/rails test %<CR>
+nnoremap <leader>tt :!rake test %<CR>
 
 if has('nvim')
   " reset 50% winheight on window resize
@@ -124,10 +142,10 @@ let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
 
 " neoformat 
-" augroup astyle
-"   autocmd!
-"  autocmd BufWritePre * Neoformat
-" augroup END
+ augroup tsfmt 
+   autocmd!
+  autocmd BufWritePre * Neoformat
+ augroup END
 " let g:neoformat_java_google = {
 "             \ 'exe': 'java',
 "             \ 'args': ['-jar /usr/local/bin/google-java-format-1.6.jar -'],
