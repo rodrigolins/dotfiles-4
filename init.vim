@@ -3,32 +3,20 @@ filetype off
 
 call plug#begin("~/.config/nvim/bundle")
  Plug 'MattesGroeger/vim-bookmarks'
-" Plug 'burnettk/vim-angular'
-" Plug 'elmcast/elm-vim'
-" Plug 'prettier/vim-prettier', {'do': 'yarn install'}
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-rails'
- Plug 'vim-ruby/vim-ruby'
-" Plug 'tpope/vim-surround'
  Plug 'majutsushi/tagbar'
  Plug 'shougo/unite.vim'
  Plug 'shougo/denite.nvim'	
  Plug 'shougo/vimfiler.vim'
-" Plug 'mfulz/cscope.nvim'
-" Plug 'jiangmiao/auto-pairs'
  Plug 'sbdchd/neoformat'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mattn/emmet-vim'
-" Plug 'w0rp/ale'
-" Plug 'skywind3000/asyncrun.vim'
-" Plug 'vim-syntastic/syntastic'
-" Plug 'artur-shaik/vim-javacomplete2'
-" Plug 'tomasr/molokai'
-" Plug 'jsfaint/gen_tags.vim'
-" Plug 'skywind3000/vim-preview'
+ Plug 'tibabit/vim-templates'
+ " typescript formatting
  Plug 'HerringtonDarkholme/yats.vim'
  Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
+ " grubox theme
  Plug 'morhetz/gruvbox'
+ " code completion
  if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
  else
@@ -36,7 +24,22 @@ call plug#begin("~/.config/nvim/bundle")
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
  endif
+ Plug 'Shougo/neosnippet.vim'
+ Plug 'Shougo/neosnippet-snippets'
 call plug#end()
+
+" Plugin key-mappings.
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB>
+\ pumvisible() ? "\<C-n>" :
+\ neosnippet#expandable_or_jumpable() ?
+\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+let g:neosnippet#snippets_directory = $HOME . '/.config/nvim/neosnips'
 
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
@@ -128,6 +131,11 @@ if has('nvim')
         \'noremap')
 endif
 
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Tagbar settings
 let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 let g:tagbar_autofocus=1
@@ -142,16 +150,10 @@ let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
 
 " neoformat 
- augroup tsfmt 
-   autocmd!
-  autocmd BufWritePre * Neoformat
- augroup END
-" let g:neoformat_java_google = {
-"             \ 'exe': 'java',
-"             \ 'args': ['-jar /usr/local/bin/google-java-format-1.6.jar -'],
-"             \ 'stdin': 1, 
-"             \ }
-" let g:neoformat_enabled_java = ['google']
+augroup tsfmt 
+  autocmd!
+ autocmd BufWritePre * Neoformat
+augroup END
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')

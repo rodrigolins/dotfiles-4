@@ -1,3 +1,4 @@
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 #source /usr/local/bin/virtualenvwrapper.sh
@@ -132,3 +133,5 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export path="$home/.fastlane/bin:$path"
 
 alias rake="noglob rake"
+
+eval "$(rbenv init -)"
