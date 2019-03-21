@@ -5,6 +5,7 @@ call plug#begin("~/.config/nvim/bundle")
  Plug 'MattesGroeger/vim-bookmarks'
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-rails'
+ Plug 'tpope/vim-abolish'
  Plug 'majutsushi/tagbar'
  Plug 'shougo/unite.vim'
  Plug 'shougo/denite.nvim'	
@@ -27,6 +28,13 @@ call plug#begin("~/.config/nvim/bundle")
  Plug 'Shougo/neosnippet.vim'
  Plug 'Shougo/neosnippet-snippets'
 call plug#end()
+
+" scratch preview
+set completeopt-=preview
+
+" fold
+set foldmethod=indent 
+set nofoldenable
 
 " Plugin key-mappings.
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
