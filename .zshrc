@@ -3,13 +3,13 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 #source /usr/local/bin/virtualenvwrapper.sh
 
 # Make python 3 the default
-#alias python="python3"
+#:alias python2="/usr/bin/python"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/teddykim/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 #JAVA STUFF
-# export JAVA_HOME=/Users/teddykim/.sdkman/candidates/java/current
+# export JAVA_HOME=/Users/theodorekim/.sdkman/candidates/java/current
 
 # Need this because pip can't compile pygraphviz without being pointed to graphviz
 #export CFLAGS="-I/usr/local/include -L/usr/local/lib"
@@ -131,6 +131,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # export path="$home/.fastlane/bin:$path"
 
-# alias rake="noglob rake"
+alias rake="noglob rake"
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+
+# Added by ./setup
+PATH=/Users/theodorekim/.gem/ruby/2.3.0/bin:$PATH
+
+# Added by ./setup
+PATH=.bundle/bin:$PATH
