@@ -14,7 +14,7 @@ call plug#begin("~/.config/nvim/bundle")
  Plug 'tibabit/vim-templates'
  " typescript formatting
  Plug 'HerringtonDarkholme/yats.vim'
- Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'do': './install.sh' }
+ Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'build': './install.sh' }
  " grubox theme
  Plug 'morhetz/gruvbox'
  " code completion

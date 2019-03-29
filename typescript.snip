@@ -1,0 +1,19 @@
+snippet     describe
+alias       spec-describe 
+abbr        describe('', () => {}); 
+options     word
+  describe('${1:#:Desc}', (${2:#:Args}) => { 
+    ${0:#:Target} 
+  });
+
+snippet     it
+alias       spec-it
+abbr        it('', () => {});
+options     word
+  it('${1:#:Desc}', (${2:#:Args}) => { 
+    ${0:#:Target} 
+  });
+
+snippet     unimplemented
+alias       not-implemented
+  assert.fail('not-implemented');
