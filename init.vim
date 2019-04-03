@@ -8,10 +8,11 @@ call plug#begin("~/.config/nvim/bundle")
  Plug 'tpope/vim-abolish'
  Plug 'majutsushi/tagbar'
  Plug 'shougo/unite.vim'
- Plug 'shougo/denite.nvim'	
  Plug 'shougo/vimfiler.vim'
  Plug 'sbdchd/neoformat'
  Plug 'tibabit/vim-templates'
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ Plug 'junegunn/fzf.vim'
  " typescript formatting
  Plug 'HerringtonDarkholme/yats.vim'
  Plug 'mhartington/nvim-typescript', {'for': ['typescript', 'tsx'], 'build': './install.sh' }
@@ -92,52 +93,28 @@ nnoremap <S-Down> :m+<CR>
 inoremap <S-Up> <Esc>:m-2<CR>
 inoremap <S-Down> <Esc>:m+<CR>
 
-" Denite configs
-nnoremap <C-p> :<C-u>Denite file_rec<CR>
-nnoremap <leader>s :<C-u>Denite buffer<CR>
-nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
-nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
-nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
+" FZF
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+
+" rg in files
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+nnoremap <silent> <leader>g :Rg! <C-R><C-W><CR>
 
 " rspec
 nnoremap <leader>rt :!rspec %<CR>
 nnoremap <leader>ra :!rake spec<CR>
 nnoremap <leader>tt :!rake test %<CR>
-
-if has('nvim')
-  " reset 50% winheight on window resize
-  augroup deniteresize
-    autocmd!
-    autocmd VimResized,VimEnter * call denite#custom#option('default',
-          \'winheight', winheight(0) / 2)
-  augroup end
-
-  call denite#custom#option('default', {
-        \ 'prompt': '❯'
-        \ })
-
-  call denite#custom#var('file_rec', 'command',
-        \ ['rg', '--files', '--glob', '!.git', '!node_modules'])
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['--hidden', '--vimgrep', '--smart-case'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>',
-        \'noremap')
-  call denite#custom#map('normal', '<Esc>', '<NOP>',
-        \'noremap')
-  call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
-        \'noremap')
-  call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
-        \'noremap')
-  call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
-        \'noremap')
-endif
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -162,9 +139,6 @@ augroup tsfmt
   autocmd!
  autocmd BufWritePre * Neoformat
 augroup END
-
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
