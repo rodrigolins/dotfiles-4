@@ -7,13 +7,7 @@ import json
 import sys
 import os.path
 
-PROJECTS = ["https://jira.bluestembrands.com/browse/WSS",
-            "https://jira.bluestembrands.com/browse/TECH",
-            "https://jira.bluestembrands.com/browse/CHECKOUT",
-            "https://jira.bluestembrands.com/browse/SHOP",
-            "https://jira.bluestembrands.com/browse/MOBILEAPP",
-            "https://jira.bluestembrands.com/browse/C3PO"
-           ]
+PROJECTS = ["https://sportngin.atlassian.net/browse/FNT"]
 
 # load all projects
 # if os.path.exists("projects.json"):

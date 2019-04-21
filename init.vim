@@ -3,6 +3,7 @@ filetype off
 
 call plug#begin("~/.config/nvim/bundle")
  Plug 'MattesGroeger/vim-bookmarks'
+ Plug 'craigemery/vim-autotag'
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-rails'
  Plug 'tpope/vim-abolish'
@@ -73,10 +74,10 @@ let mapleader = "_"
 set tags=./tags
 
 " open tag in another window 
-nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+" nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
 
 " open tag in vertical split
-map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " option-t open tagbar
 nnoremap <C-t> :TagbarToggle<CR>
@@ -117,9 +118,9 @@ nnoremap <leader>ra :!rake spec<CR>
 nnoremap <leader>tt :!rake test %<CR>
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Tagbar settings
 let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
